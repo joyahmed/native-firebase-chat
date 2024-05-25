@@ -1,4 +1,5 @@
 import Loading from '@/components/Loading';
+import { useAuth } from '@/context/AuthContext';
 import { Feather, Octicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -19,6 +20,7 @@ import {
 
 const SignIn = () => {
 	const router = useRouter();
+	const { register } = useAuth();
 	const [loading, setLoading] = useState<boolean>(false);
 	const emailRef = useRef<string>('');
 	const usernameRef = useRef<string>('');
@@ -34,11 +36,23 @@ const SignIn = () => {
 			!profileRef
 		) {
 			Alert.alert('Sign Up', 'Please fill all the fields!');
-			setLoading(false);
+			setLoading(true);
 			return;
 		}
 
-		// login process
+		let response = await register(
+			emailRef.current,
+			passwordRef.current,
+			usernameRef.current,
+			profileRef.current
+		);
+
+		setLoading(false);
+
+		console.log(`register result => =>`, response);
+		if (!response.success) {
+			Alert.alert('Sign Up', response.message);
+		}
 	};
 
 	return (

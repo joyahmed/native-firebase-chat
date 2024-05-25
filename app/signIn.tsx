@@ -1,4 +1,5 @@
 import Loading from '@/components/Loading';
+import { useAuth } from '@/context/AuthContext';
 import { Octicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -18,6 +19,7 @@ import {
 } from 'react-native-responsive-screen';
 
 const SignIn = () => {
+	const { login } = useAuth();
 	const router = useRouter();
 	const [loading, setLoading] = useState<boolean>(false);
 
@@ -28,9 +30,17 @@ const SignIn = () => {
 		setLoading(true);
 		if (!emailRef.current || !passwordRef.current) {
 			Alert.alert('Sign In', 'Please fill all the fields!');
-			setLoading(false);
 			return;
 		}
+		setLoading(true);
+
+		const response = await login(
+			emailRef.current,
+			passwordRef.current
+		);
+		console.log('sign in response: ', response)
+		setLoading(false);
+		if (!response.success) Alert.alert('Sign In', response.message);
 
 		// login process
 	};
