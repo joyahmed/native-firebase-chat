@@ -1,18 +1,11 @@
 import { useAuth } from '@/context/AuthContext';
+import { useResponsive } from '@/hooks/useResponsive';
 import { blurhash } from '@/utils/common';
 import { AntDesign, Feather } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import React from 'react';
 import { Platform, Text, View } from 'react-native';
-import {
-	Menu,
-	MenuOptions,
-	MenuTrigger
-} from 'react-native-popup-menu';
-import {
-	heightPercentageToDP as hp,
-	widthPercentageToDP as wp
-} from 'react-native-responsive-screen';
+import { Menu, MenuOptions, MenuTrigger } from 'react-native-popup-menu';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CustomMenuItem from './CustomMenuItem';
 
@@ -21,6 +14,7 @@ const ios = Platform.OS == 'ios';
 const HomeHeader = () => {
 	const { user, logout } = useAuth();
 	const { top } = useSafeAreaInsets();
+	const { hp, wp } = useResponsive();
 
 	const handleProfile = () => {};
 

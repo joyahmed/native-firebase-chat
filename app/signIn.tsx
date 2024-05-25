@@ -1,5 +1,6 @@
 import Loading from '@/components/Loading';
 import { useAuth } from '@/context/AuthContext';
+import { useResponsive } from '@/hooks/useResponsive';
 import { Octicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -13,15 +14,13 @@ import {
 	TouchableOpacity,
 	View
 } from 'react-native';
-import {
-	heightPercentageToDP as hp,
-	widthPercentageToDP as wp
-} from 'react-native-responsive-screen';
 
 const SignIn = () => {
 	const { login } = useAuth();
 	const router = useRouter();
 	const [loading, setLoading] = useState<boolean>(false);
+
+	const { hp, wp } = useResponsive();
 
 	const emailRef = useRef<string>('');
 	const passwordRef = useRef<string>('');
@@ -38,7 +37,7 @@ const SignIn = () => {
 			emailRef.current,
 			passwordRef.current
 		);
-		console.log('sign in response: ', response)
+		console.log('sign in response: ', response);
 		setLoading(false);
 		if (!response.success) Alert.alert('Sign In', response.message);
 
