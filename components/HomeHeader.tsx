@@ -45,12 +45,12 @@ const HomeHeader = () => {
 					<MenuTrigger
 						customStyles={{
 							triggerWrapper: {
-                height: hp(5.5),
-                aspectRatio: 1,
-                borderRadius: 100,
-                borderColor: 'steelblue',
-                borderWidth: 1.5,
-                overflow: 'hidden'
+								height: hp(5.5),
+								aspectRatio: 1,
+								borderRadius: 100,
+								borderColor: 'steelblue',
+								borderWidth: 1.5,
+								overflow: 'hidden'
 							}
 						}}
 					>
@@ -76,8 +76,8 @@ const HomeHeader = () => {
 								marginLeft: -5,
 								backgroundColor: 'rgba(0, 10, 50, 0.8)',
 								shadowOpacity: 0.2,
-                shadowOffset: { width: 0, height: 0 },
-                width: 160
+								shadowOffset: { width: 0, height: 0 },
+								width: 160
 							}
 						}}
 					>

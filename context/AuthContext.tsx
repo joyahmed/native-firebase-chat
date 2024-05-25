@@ -40,13 +40,6 @@ interface AuthContextType {
 	}>;
 }
 
-interface User {
-	email: string;
-	userName: string;
-	profileUrl: string;
-	userId: string;
-}
-
 // Create the AuthContext with a default value of undefined
 export const AuthContext = createContext<AuthContextType | undefined>(
 	undefined
