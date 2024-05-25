@@ -1,7 +1,7 @@
-import { Slot, useRouter, useSegments } from 'expo-router';
-// Import your global CSS file
 import { AuthContextProvider, useAuth } from '@/context/AuthContext';
+import { Slot, useRouter, useSegments } from 'expo-router';
 import { useEffect } from 'react';
+import { MenuProvider } from 'react-native-popup-menu';
 import '../global.css';
 
 const MainLayout = () => {
@@ -27,9 +27,11 @@ const MainLayout = () => {
 
 const RootLayout = () => {
 	return (
-		<AuthContextProvider>
-			<MainLayout />
-		</AuthContextProvider>
+		<MenuProvider>
+			<AuthContextProvider>
+				<MainLayout />
+			</AuthContextProvider>
+		</MenuProvider>
 	);
 };
 
