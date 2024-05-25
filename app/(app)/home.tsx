@@ -46,7 +46,7 @@ const Home = () => {
 			<View className='flex-1 bg-black/10'>
 				<StatusBar style='light' />
 				{users.length ? (
-					<ChatListComponent users={users} />
+					<ChatListComponent {...{ users, currentUser: user }} />
 				) : (
 					<View className='flex items-center' style={{ top: hp(30) }}>
 						<ActivityIndicator size='large' />

@@ -13,8 +13,9 @@ import {
 	query,
 	setDoc
 } from 'firebase/firestore';
-import { useEffect, useRef, useState } from 'react';
-import { Alert, TextInput } from 'react-native';
+import { createRef, useEffect, useRef, useState } from 'react';
+import { Alert, Keyboard, TextInput } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const useChatRoom = () => {
 	const item = useLocalSearchParams();
@@ -22,6 +23,7 @@ const useChatRoom = () => {
 	const [messages, setMessages] = useState<DocumentData>([]);
 	const textRef = useRef('');
 	const inputRef = useRef<TextInput | null>(null);
+	const scrollViewRef = useRef<ScrollView>(null);
 
 	const getRoomIdWrapper = () => {
 		return getRoomId({
@@ -76,17 +78,35 @@ const useChatRoom = () => {
 			setMessages([...allMessages]);
 		});
 
-		return unsub;
+		const keyboardDidShowListener = Keyboard.addListener(
+			'keyboardDidShow',
+			updateScrollView
+		);
+
+		return () => {
+			unsub;
+			keyboardDidShowListener.remove();
+		};
 	}, []);
 
+	useEffect(() => {
+		updateScrollView();
+	}, [messages]);
+
+	const updateScrollView = () => {
+		setTimeout(() => {
+			scrollViewRef?.current?.scrollToEnd({ animated: true }), 100;
+		});
+	};
+
 	return {
-    item,
-    user,
+		item,
+		user,
 		messages,
 		inputRef,
 		textRef,
-    handleSendMessage,
-
+		handleSendMessage,
+		scrollViewRef
 	};
 };
 

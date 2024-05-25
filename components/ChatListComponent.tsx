@@ -5,9 +5,10 @@ import ChatItem from './ChatItem';
 
 interface ChatListComponentProps {
 	users: User[];
+	currentUser: User | null
 }
 
-const ChatListComponent = ({ users }: ChatListComponentProps) => {
+const ChatListComponent = ({ users, currentUser }: ChatListComponentProps) => {
 	const router = useRouter();
 	return (
 		<View className='flex-1'>
@@ -17,7 +18,7 @@ const ChatListComponent = ({ users }: ChatListComponentProps) => {
 				keyExtractor={item => Math.random().toString()}
 				showsVerticalScrollIndicator={false}
 				renderItem={({ item, index }) => (
-					<ChatItem {...{ user: item, index, router:router }} />
+					<ChatItem {...{ user: item, index, router:router, currentUser }} />
 				)}
 			/>
 		</View>

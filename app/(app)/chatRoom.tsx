@@ -36,9 +36,10 @@ const ChatRoom = () => {
 		messages,
 		inputRef,
 		textRef,
-		handleSendMessage
+		handleSendMessage,
+		scrollViewRef
 	} = useChatRoom();
-	const { hp} = useResponsive();
+	const { hp } = useResponsive();
 
 	return (
 		<ImageBackground
@@ -50,7 +51,9 @@ const ChatRoom = () => {
 				<ChatRoomHeader {...{ user: item, router }} />
 				<View className='flex-1 justify-between overflow-visible'>
 					<View className='flex-1'>
-						<MessageList {...{messages, currentUser: user}} />
+						<MessageList
+							{...{ messages, currentUser: user, scrollViewRef }}
+						/>
 					</View>
 					<View style={{ marginBottom: hp(1.7) }} className='pt-2'>
 						<View className='flex-row items-center justify-between bg-black/30 p-2 rounded-full mx-3'>
